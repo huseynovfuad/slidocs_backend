@@ -1,0 +1,6 @@
+POSTGRES_HOST=postgres-slidocs
+POSTGRES_PORT=5432
+POSTGRES_DB=slidocs-live
+POSTGRES_USER=slidocs
+POSTGRES_PASSWORD=slidocs123
+DATABASE_URL=postgres://slidocs:slidocs123@postgres-slidocs:5432/slidocs-live

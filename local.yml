@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    command: /start.sh
+    volumes:
+      - .:/code/slidocs:z
+      - ./staticfiles:/code/slidocs/staticfiles
+      - ./mediafiles:/code/slidocs/mediafiles
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    depends_on:
+      - postgres-slidocs
+
+
+  postgres-slidocs:
+    container_name: postgres-slidocs
+    image: postgres:15-bullseye
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
+
+
+  nginx:
+    restart: always
+    depends_on:
+      - api
+    volumes:
+      - ./staticfiles:/code/slidocs/staticfiles
+      - ./mediafiles:/code/slidocs/mediafiles
+    build:
+      context: ./docker/local/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+
+volumes:
+  staticfiles: {}
+  mediafiles: {}
+  pgdb:
