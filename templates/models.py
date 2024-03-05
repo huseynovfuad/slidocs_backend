@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 
 # Create your models here.
@@ -39,6 +40,8 @@ class Template(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     cover = models.ImageField(upload_to=upload_to_templates)
     slides_num = models.PositiveIntegerField(default=1)
+    price = models.FloatField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

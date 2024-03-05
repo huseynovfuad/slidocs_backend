@@ -82,6 +82,9 @@ docs/_build/
 doc/_build/
 venv/
 media/
+static/
+mediafiles/
+staticfiles/
 # PyBuilder
 target/
 

@@ -30,6 +30,7 @@ LOCAL_APPS = [
     "templates",
     "baskets",
     "wishlists",
+    "mainapp",
 ]
 
 THIRD_PARTY_APPS = [
