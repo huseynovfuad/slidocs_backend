@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import About, PrivacyPolicy, TermCondition, RefundPolicy, Contact
+from .models import About, PrivacyPolicy, TermCondition, RefundPolicy, Contact, Slider
 
 
 class AboutSerializer(serializers.ModelSerializer):
@@ -32,3 +32,10 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = "__all__"
+
+
+class SliderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Slider
+        fields = "__all__"
+

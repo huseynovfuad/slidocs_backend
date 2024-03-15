@@ -4,6 +4,7 @@ from . import views
 app_name = "mainapp"
 
 urlpatterns = [
+    path("sliders/", views.SliderView.as_view(), name="slider"),
     path("about/", views.AboutView.as_view(), name="about"),
     path("contact/", views.ContactView.as_view(), name="contact"),
     path("term-conditions/", views.TermConditionView.as_view(), name="term-conditions"),

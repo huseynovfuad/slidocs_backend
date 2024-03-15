@@ -1,8 +1,9 @@
 from rest_framework import generics
-from .models import About, PrivacyPolicy, TermCondition, RefundPolicy, Contact
+from .models import About, PrivacyPolicy, TermCondition, RefundPolicy, Contact, Slider
 from .serializers import (
     AboutSerializer, TermConditionSerializer,
-    RefundPolicySerializer, PrivacyPolicySerializer, ContactSerializer
+    RefundPolicySerializer, PrivacyPolicySerializer, ContactSerializer,
+    SliderSerializer
 )
 
 
@@ -42,4 +43,11 @@ class RefundPolicyView(generics.RetrieveAPIView):
 class ContactView(generics.CreateAPIView):
     serializer_class = ContactSerializer
     queryset = Contact.objects.all()
+    permission_classes = ()
+
+
+
+class SliderView(generics.ListAPIView):
+    serializer_class = SliderSerializer
+    queryset = Slider.objects.all()
     permission_classes = ()

@@ -55,3 +55,19 @@ class Contact(models.Model):
 
     class Meta:
         verbose_name_plural = "Contact"
+
+
+
+def upload_to_sliders(instance, filename):
+    return f"sliders/{filename}"
+
+class Slider(models.Model):
+    title = models.CharField(max_length=300)
+    image = models.ImageField(upload_to=upload_to_sliders)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "Sliders"
