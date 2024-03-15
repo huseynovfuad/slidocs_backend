@@ -64,3 +64,19 @@ class TemplateFile(models.Model):
 
     class Meta:
         verbose_name_plural = "Template Files"
+
+
+
+def upload_to_template_gallery(instance, filename):
+    return f"templates/{slugify(instance.template.name)}/gallery/{filename}"
+
+
+class TemplateGallery(models.Model):
+    template = models.ForeignKey(Template, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_to_template_gallery)
+
+    def __str__(self):
+        return self.template.name
+
+    class Meta:
+        verbose_name_plural = "Template Gallery"

@@ -1,7 +1,12 @@
 from rest_framework import serializers
 from .models import (
-    Category, Template, TemplateFile, Platform
+    Category, Template, TemplateFile, Platform, TemplateGallery
 )
+
+class GallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TemplateGallery
+        exclude = ("template", )
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -31,5 +36,8 @@ class TemplateSerializer(serializers.ModelSerializer):
         platform_list = TemplateFile.objects.filter(template=instance).values_list("platform", flat=True)
         repr_["platforms"] = PlatformSerializer(
             Platform.objects.filter(id__in=platform_list), many=True
+        ).data
+        repr_["images"] = GallerySerializer(
+            TemplateGallery.objects.filter(template=instance), many=True
         ).data
         return repr_
