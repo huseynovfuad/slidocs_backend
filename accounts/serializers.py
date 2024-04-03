@@ -213,3 +213,11 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         token = RefreshToken.for_user(instance)
         repr_["tokens"] = {"refresh": str(token), "access": str(token.access_token)}
         return repr_
+
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("name", "surname", "email")
+

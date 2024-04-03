@@ -1,9 +1,11 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from .serializers import (
     LoginSerializer, RegisterSerializer,
-    ActivationSerializer, ChangePasswordSerializer
+    ActivationSerializer, ChangePasswordSerializer,
+    ProfileSerializer
 )
 
 User = get_user_model()
@@ -46,3 +48,13 @@ class ChangePasswordView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=201)
+
+
+
+class ProfileView(generics.RetrieveAPIView):
+    serializer_class = ProfileSerializer
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated, )
+
+    def get_object(self):
+        return self.request.user
